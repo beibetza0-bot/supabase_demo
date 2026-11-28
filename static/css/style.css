@@ -1,0 +1,9 @@
+label {
+    display: inline-block;
+    width: 80px;
+}
+
+img {
+    border-radius: 50%;
+    object-fit: cover;
+}

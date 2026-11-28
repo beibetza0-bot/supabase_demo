@@ -19,11 +19,12 @@ class ActualizarContacto:
         return render.actualizar_contacto(contacto)
 
     def POST(self):
-        datos = web.input(id=None, nombre="", email="", telefono="")
+        datos = web.input(id=None, nombre="", email="", telefono="", foto={})
 
         if datos.id:
             modelo = ModelContactos()
-            modelo.actualizarContacto(datos.id, datos.nombre, datos.email, datos.telefono)
+            foto = modelo.guardarFoto(datos.foto)
+            modelo.actualizarContacto(datos.id, datos.nombre, datos.email, datos.telefono, foto)
 
         raise web.HTTPError('303 See Other', {'Location': '/contactos'})
-    
+     

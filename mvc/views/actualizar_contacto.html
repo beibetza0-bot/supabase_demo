@@ -1,21 +1,42 @@
 $def with (contacto)
 
 $if contacto:
-    <h2>Actualizar contacto</h2>
-    <form method="POST" action="/actualizar_contacto">
+    <h1>Actualizar contacto</h1>
+
+    $if contacto["foto"]:
+        <img src="/static/imagenes/$contacto['foto']" alt="Foto" width="80" height="80">
+    $else:
+        <img src="/static/imagenes/default.png" alt="Foto" width="80" height="80">
+    <br><br>
+
+    <form action="/actualizar_contacto" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="$contacto['id']">
 
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" value="$contacto['nombre']" required><br>
+        <table>
+            <tr>
+                <td><label for="nombre">Nombre:</label></td>
+                <td><input type="text" name="nombre" id="nombre" value="$contacto['nombre']" required></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" name="email" id="email" value="$contacto['email']" required></td>
+            </tr>
+            <tr>
+                <td><label for="telefono">Teléfono:</label></td>
+                <td><input type="tel" name="telefono" id="telefono" value="$contacto['telefono']" required></td>
+            </tr>
+            <tr>
+                <td><label for="foto">Foto</label></td>
+                <td><input type="file" name="foto" id="foto" accept="image/*"></td>
+            </tr>
+        </table>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" value="$contacto['email']" required><br>
+        <button type="submit" name="guardar" id="guardar">Guardar</button>
+        <button type="reset" name="limpiar" id="limpiar">Limpiar</button>
+    </form>
 
-        <label for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" name="telefono" value="$contacto['telefono']" required><br>
-
-        <button type="submit">Guardar cambios</button>
-        <a href="/contactos">Cancelar</a>
+    <form action="/contactos" method="GET">
+        <button type="submit">Regresar</button>
     </form>
 $else:
     <h2>Contacto no encontrado</h2>

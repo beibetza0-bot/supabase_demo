@@ -1,15 +1,34 @@
 $def with ()
 
-<form action="/insertar_contacto" method=POST>
-    <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" id="nombre" required><br>
+<h1>Insertar contacto</h1>
 
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required><br>
+<img src="/static/imagenes/default.png" alt="Foto" width="80" height="80">
+<br><br>
 
-    <label for="telefono">Teléfono</label>
-    <input type="tel" name="telefono" id="telefono" required><br>
+<form action="/insertar_contacto" method="POST" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td><label for="nombre">Nombre:</label></td>
+            <td><input type="text" name="nombre" id="nombre" required></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="email" name="email" id="email" required></td>
+        </tr>
+        <tr>
+            <td><label for="telefono">Teléfono:</label></td>
+            <td><input type="tel" name="telefono" id="telefono" required></td>
+        </tr>
+        <tr>
+            <td><label for="foto">Foto</label></td>
+            <td><input type="file" name="foto" id="foto" accept="image/*"></td>
+        </tr>
+    </table>
 
     <button type="submit" name="guardar" id="guardar">Guardar</button>
     <button type="reset" name="limpiar" id="limpiar">Limpiar</button>
+</form>
+
+<form action="/contactos" method="GET">
+    <button type="submit">Regresar</button>
 </form>

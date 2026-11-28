@@ -10,10 +10,14 @@ class InsertarContacto:
         return render.insertar_contacto()  # type: ignore
 
     def POST(self):
-        formulario = web.input(nombre="", email="", telefono="")
+        formulario = web.input(nombre="", email="", telefono="", foto={})
+
+        print("DEBUG foto:", type(formulario.foto), getattr(formulario.foto, "filename", None))
 
         modelo = ModelContactos()
-        modelo.insertarContacto(formulario.nombre, formulario.email, formulario.telefono)
+        foto = modelo.guardarFoto(formulario.foto)
+        print("DEBUG foto guardada como:", foto)
+        modelo.insertarContacto(formulario.nombre, formulario.email, formulario.telefono, foto)
 
         return render.contacto_guardado()  # type: ignore
     
